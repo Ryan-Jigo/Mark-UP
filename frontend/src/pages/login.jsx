@@ -2,7 +2,7 @@ import "../../App.css";
 
 function Login() {
   return (
-    <div className="page">
+    <div className="login">
       {/* Left text */}
       <div className="left">
         <h1>Mark <span className="up-text">UP</span></h1>
