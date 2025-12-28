@@ -1,4 +1,4 @@
-.login {
+  .login {
   width: 100%;
   height: 100vh;
   /* Prefer PNG if present; fallback to existing JPG */
@@ -19,6 +19,9 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+.left:hover{
+  cursor: default;
 }
 
 /* TEXT STYLE */
@@ -110,6 +113,9 @@
 .login-card .signin-btn:hover {
   background: #1f462d;
 }
+.signin-btn:active{
+  transform: scale(0.95);
+}
 
 /* FORGOT PASSWORD LINK */
 .login-card .links-container {
@@ -129,59 +135,65 @@
 
 .login-card .signup-link:hover,
 .login-card .forgot-password:hover {
-  color: #333;
+  color: #000000;
   text-decoration: underline;
+  opacity: 0.8;
 }
+.history-section {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(600px, 1fr));
+  gap: 20px;
+  padding: 40px;
+}
+
 .history-card {
   margin-top: 50px;
   margin-left: 50px;
+  display: flex;
   align-items: center;
+  justify-content: space-between;
+  height: 100px; 
   width: 600px;
-  height: 5px;
   padding: 40px;
-  border-radius: 80px;
+  border-radius: 40px;
   background: rgba(255, 255, 255, 0.15);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
-  color: rgb(255, 255, 255);
-  display: flex;
-  align-items: center;
-  gap: 120px;
+  color: white;
   border: 1px solid #575757;
-  border-radius: 40px;
   opacity: 0.9;
 }
-.history-card:hover{
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
-  transition: 500ms;
+
+.history-card:hover {
+  transform: translateY(-6px);
   opacity: 1;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+  transition: 500ms;
 }
+
 .history-card h3 {
-  text-align: left;
+  margin: 0;
   font-weight: 800;
   letter-spacing: 2px;
-  color: rgb(255, 255, 255);
 }
-.dwnld{
-  text-align: right;
-  margin-left: 50px;
-}
+
 .download-btn {
-  margin-right: 1px;
-  width: 100px;
-  padding: 14px;
+  padding: 14px 24px;
   border-radius: 24px;
   border: none;
   cursor: pointer;
   background: #2e6c42;
   color: white;
   font-size: 16px;
-  transition: 0.3s;
-  opacity:1;
   font-weight: bold;
+  transition: transform 0.25s;
 }
+
 .download-btn:hover{
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+.download-btn:active{
+  transform: scale(0.95);
 }
 .content {
   margin-bottom: 50px;
@@ -200,7 +212,7 @@
   background: #066725;
   color: white;
   font-size: 16px;
-  transition: 0.3s;
+  transition: 0.25s;
   opacity:0.8;
   font-weight: bold;
 }
@@ -208,6 +220,9 @@
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
   transition: 500ms;
   opacity: 1;
+}
+.new-btn:active{
+  transform: scale(0.95);
 }
 .profile-icon{
   position: fixed;
@@ -220,7 +235,9 @@
   overflow: hidden;
   color:rgb(0, 0, 0);
 }
-
+.profile-icon:active{
+  transform: scale(0.95);
+}
 .home{
   width: 100%;
   height: 100vh;
@@ -231,10 +248,15 @@
   box-sizing: border-box;
   overflow: hidden;
 }
+.home:hover{
+  cursor: default;
+}
 .profile-button{
   all: unset;
 }
-
+.profile-button:hover{
+  cursor: pointer;
+}
 .new-section{
   width: 100%;
   height: 100vh;
@@ -245,6 +267,9 @@
   box-sizing: border-box;
   overflow: hidden;
   color: white;
+}
+.new-section:hover{
+  cursor: default;
 }
 .new-card {
   margin-top: 50px;
@@ -290,6 +315,9 @@
   transition: 500ms;
   opacity: 1;
 }
+.create-btn:active{
+  transform: scale(0.95);
+}
 .upload-btn {
   margin-top: 42px;
   margin-left: 500px;
@@ -309,6 +337,10 @@
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
   opacity: 1;
 }
+.upload-btn:active{
+  transform: scale(0.95);
+}
+
 .course-input input {
   width: 500px;
   border: none;

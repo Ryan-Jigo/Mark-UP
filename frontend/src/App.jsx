@@ -4,8 +4,7 @@ import New from "./pages/new";
 
 function App() {
   return <Login />;
-  //return <Home />;
-  //return <New />;
+  return <Home />;
+  return <New />;
 }
-
 export default App;
