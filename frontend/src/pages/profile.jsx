@@ -12,11 +12,11 @@ function Profile() {
             <div className="profile-card">
                 <div className="profile-info">
                     <label className="info-label">Name:</label>
-                    <span className="info-value">John Doe</span>
+                    <span className="info-value">ABCDEF</span>
                 </div>
                 <div className="profile-info">
                     <label className="info-label">Email:</label>
-                    <span className="info-value">john.doe@example.com</span>
+                    <span className="info-value">abcd@gmail.com</span>
                 </div>
                 <div className="profile-info">
                     <label className="info-label">ID:</label>

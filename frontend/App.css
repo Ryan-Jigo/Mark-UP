@@ -22,7 +22,7 @@ body, html {
   padding: 80px;
   box-sizing: border-box;
   overflow: hidden;
-  background: linear-gradient(135deg, #1f2937, #374151, #4b5563);
+  /*background: linear-gradient(135deg, #1f2937, #374151, #4b5563);*/
 }
 
 /* LEFT TEXT */
@@ -111,7 +111,6 @@ body, html {
 .login-card input::placeholder {
   color: #000000;
   font-weight:bold;
-
 }
 
 /* BUTTON */
@@ -126,6 +125,7 @@ body, html {
   font-size: 16px;
   transition: 0.3s;
   margin-bottom: 15px;
+  border: 0.3px solid black;
 }
 
 .login-card .signin-btn:hover {
@@ -202,7 +202,7 @@ body, html {
 .download-btn {
   padding: 14px 24px;
   border-radius: 24px;
-  border: none;
+  border: 0.3px solid black;
   cursor: pointer;
   background: #0d5122;
   color: white;
@@ -221,6 +221,8 @@ body, html {
   margin-bottom: 50px;
   color:#D4AF37;
   text-align:center;
+  position: fixed;
+  left: 100px;
 }
 .new-btn {
   position: fixed;
@@ -282,11 +284,31 @@ body, html {
   padding: 80px;
   box-sizing: border-box;
   overflow: hidden;
-  background: linear-gradient(135deg, #1f2937, #374151, #4b5563);
+  /*background: linear-gradient(135deg, #1f2937, #374151, #4b5563);*/
 }
 .home:hover{
   cursor: default;
 }
+.settings-button{
+  all: unset;
+  position: fixed;
+  top: 76px;
+  right: 24px;
+  z-index: 20;
+  display: inline-flex;
+  color: white  ;
+}
+.settings-button:hover{
+  cursor: pointer;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  transition: 500ms;
+}
+.settings-button:active{
+  transform: translateY(0) scale(0.95);
+  box-shadow: none;
+  transform: rotate(60deg);
+}
+
 .profile-button{
   all: unset;
   position: fixed;
@@ -308,7 +330,7 @@ body, html {
   box-sizing: border-box;
   overflow: hidden;
   color: #D4AF37;
-  background: linear-gradient(135deg, #1f2937, #374151, #4b5563);
+  /*background: linear-gradient(135deg, #1f2937, #374151, #4b5563);*/
 }
 .new-section:hover{
   cursor: default;
@@ -444,7 +466,7 @@ body, html {
   padding: 80px;
   box-sizing: border-box;
   overflow: hidden;
-  background: linear-gradient(135deg, #1f2937, #374151, #4b5563);
+  /*background: linear-gradient(135deg, #1f2937, #374151, #4b5563);*/
 }
 .profile-section:hover{
   cursor: default;

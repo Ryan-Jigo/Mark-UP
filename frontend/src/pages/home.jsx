@@ -1,6 +1,7 @@
 import "../../App.css";
 import React from "react";
 import ProfileAvatar from "../components/ProfileAvatar";
+import Settings from "../components/settings";
 import History from "./history";
 
 function Home() {
@@ -9,8 +10,11 @@ function Home() {
             <button className="profile-button" aria-label="Open profile">
                 <ProfileAvatar size={32}/>
             </button>
+            <button className="settings-button" aria-label="Open settings">
+                <Settings size={32}/>
+            </button>
             <div className="content">
-                <h1>Home Page</h1>
+                <h1>Welcome User,</h1>
                 <p></p>
             </div>
             <History />
