@@ -1,9 +1,12 @@
 import "../../App.css";
+import Navbar from "../components/navbar";
 
 function New() {
     return (
         <div className="new-section">
-            <h1>Create New Document</h1>
+            <Navbar />
+            <div className="heading">
+            <h1>Create New Document</h1></div>
             <div className="new-card"><div className="course-input">
             <input type="text" placeholder="Course Name" />
             </div></div>
