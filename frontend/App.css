@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Italiana&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Italiana&family=Limelight&display=swap');
 /* GLOBAL STYLES */
 body, html {
   margin: 0;
@@ -62,7 +62,7 @@ body, html {
  }
 /* LEFT TEXT */
 .left {
-  font-family: "Italiana", sa;
+  font-family: "Limelight", cursive;
   position: absolute;
   top: 50%;
   left: 30%;
@@ -74,10 +74,10 @@ body, html {
 
 /* TEXT STYLE */
 .left h1 {
-  color: #F2C94C;
+  color: #1F2937;
 
-  font-family: "Italiana", sa;
-  font-size: 170px;
+  font-family: "Limelight", cursive;
+  font-size: 150px;
   font-weight: 500;
   letter-spacing: 4px;
   display: flex;
@@ -227,10 +227,11 @@ body, html {
 }
 .navbar h1{
   color: #1F2937;
-  font-family: 'Italiana', serif;
+  font-family: 'Limelight', cursive;
   color: #bd373f;
   margin: 0;
   font-size: 40px;
+  letter-spacing: -2.0px;
   line-height: 1;
   display: flex;
   align-items: center;
@@ -288,11 +289,23 @@ body, html {
   color: #1F2937;
   cursor: pointer;
 }
+.navbar .profile:hover {
+  text-decoration: underline;
+}
+.navbar .profile:active {
+  transform: scale(0.95);
+}
 .navbar .Settings {
   font-size: 16px;
   font-weight: bold;
   color: #1F2937;
   cursor: pointer;
+}
+.navbar .Settings:hover {
+  text-decoration: underline;
+}
+.navbar .Settings:active {
+  transform: scale(0.95);
 }
 .history-card {
   margin-top: 20px;
@@ -323,7 +336,7 @@ body, html {
   margin: 0;
   font-weight: 900;
   letter-spacing: 2px;
-  color: #931f26;
+  color: #bd373f;
 }
 
 .download-btn {
@@ -365,7 +378,7 @@ body, html {
   color: white;
   font-size: 16px;
   transition: 0.25s;
-  opacity:0.8;
+  opacity:0.9;
   font-weight: bold;
 }
 .new-btn:hover{
@@ -578,9 +591,11 @@ body, html {
 .profile-section h1{
   text-align: center;
   margin: 0 0 32px 0;
-  font-weight: 600;
-  letter-spacing: 2px;
-  color: #1F2937;
+  font-family: 'Limelight', cursive;
+  font-weight: 400;
+  letter-spacing: -0.5px;
+  color: #bd373f;
+  font-size: 40px;
   margin-top: 40px;
 }
 .profile-section .navbar h1{

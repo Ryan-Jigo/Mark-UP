@@ -6,6 +6,7 @@ import History from "./history";
 import Navbar from "../components/navbar";
 
 function Home() {
+    const navigate = useNavigate();
     return (
         <div className="home">
             <Navbar />
@@ -14,7 +15,7 @@ function Home() {
                 <p></p>
             </div>
             <History />
-            <button className="new-btn">New +</button>
+            <button className="new-btn" onClick={()=>navigate("/new")}>New +</button>
         </div>
     );
 }
