@@ -1,36 +1,69 @@
 import cv2
 import numpy as np
+from PIL import Image
 
-standard_width=1200
+STANDARD_WIDTH = 1500
 
-def standardize_image(image_path:str):
-    image=cv2.imread(image_path)
+def standardize_image(image_path: str, debug=True):
+    image = cv2.imread(image_path)
     if image is None:
         raise ValueError("Image not found or unable to read")
-    height, width = image.shape[:2]
-    scale_ratio = standard_width / width
-    if width != standard_width:
-        aspect_ratio = height / width
-        new_height = int(standard_width * aspect_ratio)
-        resized_image = cv2.resize(image, (standard_width, new_height))
-        return resized_image
-    gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-    clahe=cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8,8))
-    enhanced_image=clahe.apply(gray_image)
-    image=cv2.cvtColor(enhanced_image, cv2.COLOR_GRAY2BGR)
-    deskewed_img = deskewed_image(image)
-    return deskewed_img
-
-def deskewed_image(image):
+    h, w = image.shape[:2]
+    scale = 1500 / w
+    image = cv2.resize(image, (1500, int(h * scale)))
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-    coords = np.column_stack(np.where(gray > 0))
+    deskewed = deskew_image(gray)
+    deskewed = cv2.resize(
+        deskewed,
+        None,
+        fx=1.8,
+        fy=1.8,
+        interpolation=cv2.INTER_CUBIC
+    )
+    _, binary = cv2.threshold(
+        deskewed,
+        0,
+        255,
+        cv2.THRESH_BINARY + cv2.THRESH_OTSU
+    )
+    if np.mean(binary) < 127:
+        binary = cv2.bitwise_not(binary)
+    
+    if debug:
+        # Convert to PIL Image and display
+        pil_image = Image.fromarray(binary)
+        pil_image.show()
+    
+    return binary
+
+
+
+def deskew_image(gray):
+    thresh = cv2.threshold(
+        gray, 0, 255,
+        cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU
+    )[1]
+    coords=np.column_stack(np.where(thresh > 0))
+    if len(coords)==0:
+        print("No foreground detected")
+        return gray
+    
     angle = cv2.minAreaRect(coords)[-1]
-    if angle < -45:
-        angle = -(90 + angle)
+    if angle<-45:
+        angle=-(90 + angle)
     else:
-        angle = -angle
-    (h, w) = image.shape[:2]
-    center = (w // 2, h // 2)
-    M = cv2.getRotationMatrix2D(center, angle, 1.0)
-    rotated = cv2.warpAffine(image, M, (w, h), flags=cv2.INTER_CUBIC, borderMode=cv2.BORDER_REPLICATE)
+        angle=-angle
+    print(f"Detected skew angle: {angle:.2f}")
+
+    if abs(angle) < 1.0:
+        print("Angle too small, skipping correction")
+        return gray
+    h, w = gray.shape
+    M = cv2.getRotationMatrix2D((w // 2, h // 2), angle, 1.0)
+    rotated = cv2.warpAffine(
+        gray, M, (w, h),
+        flags=cv2.INTER_CUBIC,
+        borderMode=cv2.BORDER_REPLICATE
+    )
+    print("Skew correction applied")
     return rotated

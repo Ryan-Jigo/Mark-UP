@@ -1,6 +1,7 @@
 import "../../App.css";
 import { useNavigate } from "react-router-dom";
 import {useState} from "react";
+import Navbar from "../components/navbar";
 
 function Login() {
   const navigate = useNavigate();

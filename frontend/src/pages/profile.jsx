@@ -7,7 +7,9 @@ function Profile() {
     return (
         <div className="profile-section">
             <Navbar />
-            <h1>User Profile</h1>
+            <div className="content">
+                <h1>User Profile</h1>
+            </div>
             <div className="profile-layout">
                 <div className="profile-icon" aria-label="Open profile">
                     <ProfileAvatar size={120} />

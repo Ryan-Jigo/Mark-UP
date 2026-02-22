@@ -12,7 +12,7 @@ body, html {
 /* LOGIN PAGE STYLES */
  .login {
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
   /* Prefer PNG if present; fallback to existing JPG 
   background-image: url("/bg.png"), url("/bg.jpg"); */
     background-size: 100% 100%;
@@ -20,9 +20,10 @@ body, html {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 80px;
+  padding: clamp(20px, 5vw, 80px);
   box-sizing: border-box;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
   /*background: linear-gradient(
     to right,
     #8e0f17 0%,
@@ -63,10 +64,11 @@ body, html {
 /* LEFT TEXT */
 .left {
   font-family: "Limelight", cursive;
-  position: absolute;
-  top: 50%;
-  left: 30%;
-  transform: translate(-50%, -50%);
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
 }
 .left:hover{
   cursor: default;
@@ -77,11 +79,12 @@ body, html {
   color: #1F2937;
 
   font-family: "Limelight", cursive;
-  font-size: 150px;
+  font-size: clamp(60px, 10vw, 150px);
   font-weight: 500;
-  letter-spacing: 4px;
+  letter-spacing: clamp(2px, 0.3vw, 4px);
   display: flex;
-  gap: 40px;
+  gap: clamp(20px, 3vw, 40px);
+  margin: 0;
 }
 /*@keyframes slideUp {
   from {
@@ -96,18 +99,16 @@ body, html {
 
 /* GLASS LOGIN CARD */
 .login-card {
-  position: absolute;
-  right: 120px;     /* adjust spacing from right */
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 2; 
-  width: 360px;
-  padding: 40px;
-  border-radius: 80px;
+  flex-shrink: 0;
+  width: 100%;
+  max-width: 360px;
+  padding: clamp(20px, 4vw, 40px);
+  border-radius: clamp(40px, 8vw, 80px);
   background: rgba(255, 255, 255, 0.15);;
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+  z-index: 2;
 }
 .login-card:hover{
   cursor: default;
@@ -117,15 +118,16 @@ body, html {
   text-align: center;
   margin-bottom: 30px;
   font-weight: 400;
-  letter-spacing: 2px;
+  letter-spacing: clamp(1px, 0.2vw, 2px);
   stroke-width: 1px;
   color: #1F2937;
   font-weight: bold;
+  font-size: clamp(20px, 2.5vw, 24px);
 }
 
 .login-card input {
   width: 100%;
-  padding: 14px;
+  padding: clamp(12px, 1.5vh, 14px);
   margin-bottom: 20px;
   border-radius: 12px;
   border: none;
@@ -133,8 +135,9 @@ body, html {
   border: #1F2937 1px solid;
   background: #F3F4F6;
   color: #000000;
-  font-size: 15px;
+  font-size: clamp(14px, 1.5vw, 15px);
   font-weight: bold;
+  box-sizing: border-box;
 }
 
 .login-card input::placeholder {
@@ -145,13 +148,13 @@ body, html {
 /* BUTTON */
 .login-card .signin-btn {
   width: 100%;
-  padding: 14px;
+  padding: clamp(12px, 1.5vh, 14px);
   border-radius: 24px;
   border: none;
   cursor: pointer;
   background: #0d5122;
   color: white;
-  font-size: 16px;
+  font-size: clamp(14px, 1.5vw, 16px);
   transition: 0.3s;
   margin-bottom: 15px;
   border: 0.3px solid black;
@@ -173,13 +176,15 @@ body, html {
   justify-content: space-between;
   align-items: center;
   margin-top: 20px;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
 .login-card .signup-link,
 .login-card .forgot-password {
   color: #000000;
   text-decoration: none;
-  font-size: 16px;
+  font-size: clamp(13px, 1.5vw, 16px);
   transition: 0.3s;
   font-weight: bold;
 }
@@ -191,9 +196,12 @@ body, html {
 }
 .history-section {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(600px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 600px), 1fr));
   gap: 20px;
-  padding: 16px 40px 40px 40px;
+  padding: 16px clamp(20px, 3vw, 40px) 40px clamp(20px, 3vw, 40px);
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
 }
 .navbar{
   position: fixed;
@@ -202,22 +210,25 @@ body, html {
   transform: translateX(-50%);
   width: 90%;
   max-width: 1500px;
-  margin-top: 20px;
-  border-radius: 25px;
-  height: 100px;
+  margin-top: clamp(10px, 2vh, 20px);
+  border-radius: clamp(15px, 2vw, 25px);
+  min-height: 80px;
+  height: auto;
   background: rgba(255, 255, 255, 0.65);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 40px;
+  padding: clamp(10px, 2vw, 20px) clamp(20px, 3vw, 40px);
   box-sizing: border-box;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   z-index: 10;
   margin-bottom: 20px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
   border: 2px black solid;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 .navbar-left {
   display: flex;
@@ -230,18 +241,18 @@ body, html {
   font-family: 'Limelight', cursive;
   color: #bd373f;
   margin: 0;
-  font-size: 40px;
-  letter-spacing: -2.0px;
+  font-size: clamp(24px, 4vw, 40px);
+  letter-spacing: clamp(-1.5px, -0.2vw, -2.0px);
   line-height: 1;
   display: flex;
   align-items: center;
-  height: 100%;
+  white-space: nowrap;
 }
 .navbar h2{
   color: #1F2937;
   justify-content: center;
   align-items: center;
-  font-size: 24px;
+  font-size: clamp(18px, 2.5vw, 24px);
 }
 .navbar .nav-links {
   display: flex;
@@ -250,7 +261,7 @@ body, html {
 .navbar .nav-links a {
   color: #1F2937;
   text-decoration: none;
-  font-size: 16px;
+  font-size: clamp(14px, 1.5vw, 16px);
   font-weight: bold;
 }
 .navbar .nav-links a:hover {
@@ -260,9 +271,8 @@ body, html {
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 20px;
-  position: absolute;
-  right: 40px;
+  gap: clamp(10px, 2vw, 20px);
+  margin-left: auto;
 }
 .navbar-icon-button {
   all: unset;
@@ -284,7 +294,7 @@ body, html {
   transform: rotate(60deg) scale(0.95);
 }
 .navbar .profile {
-  font-size: 16px;
+  font-size: clamp(14px, 1.5vw, 16px);
   font-weight: bold;
   color: #1F2937;
   cursor: pointer;
@@ -296,7 +306,7 @@ body, html {
   transform: scale(0.95);
 }
 .navbar .Settings {
-  font-size: 16px;
+  font-size: clamp(14px, 1.5vw, 16px);
   font-weight: bold;
   color: #1F2937;
   cursor: pointer;
@@ -309,20 +319,24 @@ body, html {
 }
 .history-card {
   margin-top: 20px;
-  margin-left: 50px;
+  margin-left: 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 100px; 
-  width: 600px;
-  padding: 40px;
-  border-radius: 40px;
+  min-height: 80px;
+  width: 100%;
+  max-width: 600px;
+  padding: clamp(20px, 3vw, 40px);
+  border-radius: clamp(20px, 3vw, 40px);
   background: rgba(255, 255, 255, 0.15);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   color: #1F2937;
   border: 1px solid #575757;
   opacity: 0.9;
+  box-sizing: border-box;
+  flex-wrap: wrap;
+  gap: 15px;
 }
 
 .history-card:hover {
@@ -335,20 +349,22 @@ body, html {
 .history-card h3 {
   margin: 0;
   font-weight: 900;
-  letter-spacing: 2px;
+  letter-spacing: clamp(1px, 0.2vw, 2px);
   color: #bd373f;
+  font-size: clamp(18px, 2vw, 22px);
 }
 
 .download-btn {
-  padding: 14px 24px;
+  padding: clamp(10px, 1.5vh, 14px) clamp(16px, 2vw, 24px);
   border-radius: 24px;
   border: 0.3px solid black;
   cursor: pointer;
   background: #0d5122;
   color: white;
-  font-size: 16px;
+  font-size: clamp(14px, 1.5vw, 16px);
   font-weight: bold;
   transition: transform 0.25s;
+  white-space: nowrap;
 }
 
 .download-btn:hover{
@@ -359,27 +375,31 @@ body, html {
 }
 .content {
   margin-top: 10px;
-  padding: 20px;
+  padding: clamp(15px, 2vw, 20px);
   color:#1F2937;
   text-align:center;
   position: relative;
   font-family: "Monserrat", sans-serif;
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
 }
 .new-btn {
   position: fixed;
-  bottom: 30px;
-  right: 30px;
-  width: 100px;
-  padding: 14px;
+  bottom: clamp(15px, 3vh, 30px);
+  right: clamp(15px, 3vw, 30px);
+  min-width: 80px;
+  padding: clamp(10px, 1.5vh, 14px) clamp(16px, 2vw, 20px);
   border-radius: 24px;
   border: none;
   cursor: pointer;
   background: #0d5122;
   color: white;
-  font-size: 16px;
+  font-size: clamp(14px, 1.5vw, 16px);
   transition: 0.25s;
   opacity:0.9;
   font-weight: bold;
+  z-index: 100;
 }
 .new-btn:hover{
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
@@ -395,6 +415,8 @@ body, html {
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  width: clamp(40px, 5vw, 50px);
+  height: clamp(40px, 5vw, 50px);
 }
 
 /* Glassmorphism */
@@ -418,13 +440,14 @@ body, html {
 }
 .home{
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
   background-color: #F3F4F6;
   background-size: cover;
-  padding: 80px;
-  margin-top: 70px;
+  padding: clamp(20px, 5vw, 80px);
+  padding-top: clamp(100px, 15vh, 150px);
   box-sizing: border-box;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
   /*background: linear-gradient(135deg, #1f2937, #374151, #4b5563);*/
 }
 .home:hover{
@@ -432,42 +455,47 @@ body, html {
 }
 .new-section{
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
   background-color: #F3F4F6;
   background-size: cover;
   background-position: center;
-  padding: 80px;
-  margin-top: 70px;
+  padding: clamp(20px, 5vw, 80px);
+  padding-top: clamp(100px, 15vh, 150px);
   box-sizing: border-box;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
   color: #1F2937;
-  margin-top: 70px;
   /*background: linear-gradient(135deg, #1f2937, #374151, #4b5563);*/
 }
 .new-section h1{
   color: #1F2937;
   text-align: center;
+  font-size: clamp(24px, 4vw, 36px);
 }
 .new-section .navbar h1{
   color: #bd373f;
 }
 .new-card {
-  margin-top: 50px;
-  margin-left: 50px;
+  margin-top: clamp(20px, 4vh, 50px);
+  margin-left: 0;
+  margin-right: auto;
+  margin-left: auto;
   align-items: center;
-  width: 600px;
-  height: 5px;
-  padding: 40px;
-  border-radius: 80px;
+  width: 100%;
+  max-width: 600px;
+  min-height: 80px;
+  padding: clamp(20px, 3vw, 40px);
+  border-radius: clamp(20px, 3vw, 40px);
   background: rgba(255, 255, 255, 0.15);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   color: #931f26;
   display: flex;
-  gap: 120px; 
+  gap: clamp(20px, 10vw, 120px);
   border: 1px solid #575757;
-  border-radius: 40px;
   opacity: 0.9;
+  box-sizing: border-box;
+  flex-wrap: wrap;
 }
 .new-card:hover{
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
@@ -476,19 +504,20 @@ body, html {
 }
 .create-btn {
   position: fixed;
-  bottom: 20px;
-  right: 20px;
-  width: 100px;
-  padding: 14px;
+  bottom: clamp(15px, 3vh, 20px);
+  right: clamp(15px, 3vw, 20px);
+  min-width: 80px;
+  padding: clamp(10px, 1.5vh, 14px) clamp(16px, 2vw, 20px);
   border-radius: 24px;
   border: none;
   cursor: pointer;
   background: #0d5122;
   color: white;
-  font-size: 16px;
+  font-size: clamp(14px, 1.5vw, 16px);
   transition: 0.3s;
   opacity:0.8;
   font-weight: bold;
+  z-index: 100;
 }
 .create-btn:hover{
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
@@ -499,19 +528,20 @@ body, html {
   transform: scale(0.95);
 }
 .upload-btn {
-  margin-top: 42px;
-  margin-left: 500px;
-  width: 100px;
-  padding: 14px;
+  margin-top: 20px;
+  margin-left: 0;
+  min-width: 100px;
+  padding: clamp(10px, 1.5vh, 14px) clamp(16px, 2vw, 20px);
   border-radius: 24px;
   border: none;
   cursor: pointer;
   background: #0d5122;
   color: white;
-  font-size: 16px;
+  font-size: clamp(14px, 1.5vw, 16px);
   transition: 0.3s;
   opacity:0.8;
   font-weight: bold;
+  align-self: flex-start;
 }
 .upload-btn:hover{
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
@@ -522,52 +552,56 @@ body, html {
 }
 
 .course-input input {
-  width: 500px;
+  width: 100%;
+  max-width: 500px;
   border: none;
   outline: none;
   background: transparent;
   color: #000000;
-  font-size: 20px;
+  font-size: clamp(16px, 2vw, 20px);
 }
 .course-input input::placeholder {
   color: #1F2937;
   text-align: left;
 }
 .batch-input input {
-  width: 500px;
+  width: 100%;
+  max-width: 500px;
   border: none;
   outline: none;
   background: transparent;
   color: #1F2937;
-  font-size: 20px;
+  font-size: clamp(16px, 2vw, 20px);
 }
 .batch-input input::placeholder {
   color: #1F2937;
 }
 .date-label {
-  font-size: 20px;
-  margin-right: 20px;
+  font-size: clamp(16px, 2vw, 20px);
+  margin-right: clamp(10px, 2vw, 20px);
   color: #1F2937;
 } 
 .date-input input {
-  padding-left: 110px;
-  width: 270px;
+  padding-left: clamp(10px, 10vw, 110px);
+  width: 100%;
+  max-width: 270px;
   border: none;
   outline: none;
   background: transparent;
   color: #1F2937;
-  font-size: 20px;
+  font-size: clamp(16px, 2vw, 20px);
 }
 .date-input input::placeholder {
   color: #1F2937;
 }
 .exam-input input {
-  width: 500px;
+  width: 100%;
+  max-width: 500px;
   border: none;
   outline: none;
   background: transparent;
   color: #1F2937;
-  font-size: 20px;
+  font-size: clamp(16px, 2vw, 20px);
 }
 .exam-input input::placeholder {
   color: #1F2937;
@@ -576,42 +610,41 @@ body, html {
 /* PROFILE PAGE STYLES */
 .profile-section {
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
   background-color: #F3F4F6;
   background-size: cover;
   background-position: center;
-  padding: 140px 80px 80px 80px;
+  padding: clamp(100px, 15vh, 140px) clamp(20px, 5vw, 80px) clamp(40px, 5vh, 80px) clamp(20px, 5vw, 80px);
   box-sizing: border-box;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
   /*background: linear-gradient(135deg, #1f2937, #374151, #4b5563);*/
 }
 .profile-section:hover{
   cursor: default;
 }
-.profile-section h1{
-  text-align: center;
-  margin: 0 0 32px 0;
-  font-family: 'Limelight', cursive;
-  font-weight: 400;
-  letter-spacing: -0.5px;
-  color: #bd373f;
-  font-size: 40px;
-  margin-top: 40px;
+.profile-section-heading{
+  margin-top: 10px;
+  padding: clamp(15px, 2vw, 20px);
+  color:#1F2937;
+  text-align:center;
+  position: relative;
+  font-family: "Monserrat", sans-serif;
+  font-size: clamp(20px, 3vw, 28px);
 }
-.profile-section .navbar h1{
-  color: #bd373f;
-  text-align: center;
-}
+
 .profile-layout {
   display: flex;
   gap: 40px;
   align-items: flex-start;
   justify-content: center;
   flex-wrap: wrap;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 .profile-icon {
-  width: 150px;
-  height: 150px;
+  width: clamp(100px, 15vw, 150px);
+  height: clamp(100px, 15vw, 150px);
   border-radius: 50%;
   cursor: pointer;
   display: inline-flex;
@@ -622,13 +655,14 @@ body, html {
   display: flex;
   flex-direction: column;
   gap: 12px;
-  align-items: flex-end;
+  align-items: center;
+  width: 100%;
 }
 .profile-card {
-  width: 600px;
-  max-width: 90vw;
-  padding: 32px;
-  border-radius: 32px;
+  width: 100%;
+  max-width: min(600px, 90vw);
+  padding: clamp(20px, 3vw, 32px);
+  border-radius: clamp(20px, 3vw, 32px);
   background: rgba(255, 255, 255, 0.15);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
@@ -638,6 +672,7 @@ body, html {
   display: flex;
   flex-direction: column;
   gap: 0;
+  box-sizing: border-box;
 }
 .profile-card:hover{
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
@@ -646,10 +681,10 @@ body, html {
 }
 .profile-info {
   display: grid;
-  grid-template-columns: 140px 1fr;
-  column-gap: 16px;
+  grid-template-columns: minmax(100px, 140px) 1fr;
+  column-gap: clamp(10px, 2vw, 16px);
   align-items: center;
-  font-size: 18px;
+  font-size: clamp(14px, 1.8vw, 18px);
   padding: 10px 0;
   border-bottom: 1px solid rgba(87, 87, 87, 0.35);
 }
@@ -663,15 +698,15 @@ body, html {
   border-bottom: none;
 }
 .edit-btn {
-  align-self: flex-end;
-  width: 110px;
-  padding: 14px;
+  margin-top: 20px;
+  min-width: 100px;
+  padding: clamp(10px, 1.5vh, 14px) clamp(16px, 2vw, 20px);
   border-radius: 24px;
   border: none;
   cursor: pointer;
   background: #0d5122;
   color: white;
-  font-size: 16px;
+  font-size: clamp(14px, 1.5vw, 16px);
   transition: 0.3s;
   opacity:0.95;
   font-weight: bold;
@@ -683,4 +718,186 @@ body, html {
 }
 .edit-btn:active{
   transform: scale(0.95);
+}
+
+/* RESPONSIVE MEDIA QUERIES */
+
+/* Tablets and smaller laptops */
+@media screen and (max-width: 1024px) {
+  .login {
+    flex-direction: column;
+    gap: 40px;
+    padding: 40px 20px;
+  }
+  
+  .left {
+    position: static;
+    transform: none;
+  }
+  
+  .left h1 {
+    font-size: clamp(50px, 8vw, 100px);
+    text-align: center;
+  }
+  
+  .login-card {
+    position: static;
+    transform: none;
+    margin: 0 auto;
+  }
+  
+  .navbar {
+    width: 95%;
+    padding: 15px 20px;
+  }
+  
+  .history-card {
+    max-width: 100%;
+  }
+  
+  .new-card {
+    max-width: 100%;
+  }
+}
+
+/* Mobile devices */
+@media screen and (max-width: 768px) {
+  .left h1 {
+    font-size: clamp(40px, 12vw, 80px);
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .navbar {
+    width: 95%;
+    padding: 10px 15px;
+    margin-top: 10px;
+  }
+  
+  .navbar h1 {
+    font-size: clamp(20px, 5vw, 32px);
+  }
+  
+  .navbar h2 {
+    font-size: clamp(18px, 4vw, 20px);
+  }
+  
+  .navbar-right {
+    gap: 10px;
+  }
+  
+  .history-section {
+    grid-template-columns: 1fr;
+    padding: 16px 15px 40px 15px;
+  }
+  
+  .history-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+    padding: 20px;
+  }
+  
+  .history-card h3 {
+    font-size: 18px;
+  }
+  
+  .download-btn {
+    width: 100%;
+    padding: 12px 20px;
+  }
+  
+  .new-card {
+    flex-direction: column;
+    gap: 15px;
+    padding: 20px;
+  }
+  
+  .course-input input,
+  .batch-input input,
+  .exam-input input {
+    max-width: 100%;
+    font-size: 16px;
+  }
+  
+  .date-input input {
+    padding-left: 10px;
+    max-width: 100%;
+  }
+  
+  .upload-btn {
+    margin-left: 0;
+    width: 100%;
+  }
+  
+  .profile-layout {
+    gap: 20px;
+  }
+  
+  .profile-icon {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .profile-info {
+    grid-template-columns: 1fr;
+    gap: 5px;
+    font-size: 14px;
+  }
+  
+  .profile-info span {
+    padding-bottom: 5px;
+  }
+  
+  .edit-btn,
+  .create-btn,
+  .new-btn {
+    font-size: 14px;
+    padding: 10px 16px;
+  }
+}
+
+/* Small mobile devices */
+@media screen and (max-width: 480px) {
+  .login {
+    padding: 20px 15px;
+  }
+  
+  .left h1 {
+    font-size: clamp(32px, 10vw, 60px);
+  }
+  
+  .login-card {
+    max-width: 100%;
+    padding: 25px;
+    border-radius: 40px;
+  }
+  
+  .navbar {
+    border-radius: 15px;
+    padding: 8px 12px;
+  }
+  
+  .navbar h1 {
+    font-size: 24px;
+  }
+  
+  .history-card,
+  .new-card {
+    border-radius: 20px;
+    padding: 15px;
+  }
+  
+  .profile-card {
+    border-radius: 20px;
+    padding: 20px;
+  }
+  
+  .new-btn,
+  .create-btn {
+    bottom: 10px;
+    right: 10px;
+    min-width: 70px;
+    font-size: 13px;
+  }
 }

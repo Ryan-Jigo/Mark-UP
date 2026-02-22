@@ -1,14 +1,10 @@
-print("=== DEMO SCRIPT STARTED ===")
+import pytesseract
+from PIL import Image
 
-from app.services.ocr_service import process_image, extract_text
+pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
 
-image_path = "data/samples/img.png"
-print("Using image:", image_path)
+img = Image.open(r"C:\Users\ryanj\Mark-UP\backend\data\samples\image.png")
+text = pytesseract.image_to_string(img)
 
-processed_image = process_image(image_path)
-print("Image processed successfully")
-
-text = extract_text(processed_image)
-
-print("====== OCR OUTPUT ======")
+print("RAW OCR OUTPUT:")
 print(text)
