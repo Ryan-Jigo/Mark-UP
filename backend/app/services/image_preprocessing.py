@@ -1,5 +1,7 @@
 import cv2
 import numpy as np
+import pytesseract
+from pytesseract import Output
 from PIL import Image
 
 STANDARD_WIDTH = 1500
@@ -67,3 +69,25 @@ def deskew_image(gray):
     )
     print("Skew correction applied")
     return rotated
+
+
+def correct_orientation(image):
+    try:
+        osd = pytesseract.image_to_osd(image, output_type=Output.DICT)
+        angle = osd["rotate"]
+
+        print(f"Orientation angle detected: {angle}")
+
+        if angle != 0:
+            image = cv2.rotate(
+                image,
+                {
+                    90: cv2.ROTATE_90_CLOCKWISE,
+                    180: cv2.ROTATE_180,
+                    270: cv2.ROTATE_90_COUNTERCLOCKWISE
+                }[angle]
+            )
+    except:
+        print("⚠ Orientation detection failed")
+
+    return image
