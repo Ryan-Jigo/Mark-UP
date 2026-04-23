@@ -24,18 +24,48 @@ print("\n********OCR Extraction Completed********\n")
 regions = detect_layout(processed)
 cropped = crop_regions(processed, regions)
 
+print(f"Detected regions: {list(cropped.keys())}")
+
 # 🔽 WRITE DEBUG OUTPUTS HERE
-cv2.imwrite("data/debug/header.png", cropped["header"])
-cv2.imwrite("data/debug/marks_table.png", cropped["marks_table"])
-cv2.imwrite("data/debug/marks_secured.png", cropped["marks_secured"])
+if cropped.get("header") is not None:
+    cv2.imwrite("data/debug/header.png", cropped["header"])
+    print("✅ Saved header.png")
+else:
+    print("⚠️  Header region not detected")
+
+if cropped.get("marks_table") is not None:
+    cv2.imwrite("data/debug/marks_table.png", cropped["marks_table"])
+    print("✅ Saved marks_table.png")
+else:
+    print("⚠️  Marks table region not detected")
+
+if cropped.get("marks_secured") is not None:
+    cv2.imwrite("data/debug/marks_secured.png", cropped["marks_secured"])
+    print("✅ Saved marks_secured.png")
+else:
+    print("⚠️  Marks secured region not detected")
 
 print("✅ Debug layout images saved in data/debug/")
 print("********Layout Detection Completed********\n")
-header = cv2.imread("data/debug/header.png")
-marks_table = cv2.imread("data/debug/marks_table.png")
-marks_secured =  cv2.imread("data/debug/marks_secured.png")
 
-cv2.imwrite("data/debug/header_clean.png", clean_header_roi(header))
-cv2.imwrite("data/debug/marks_table_clean.png", clean_marks_table_roi(marks_table))
-cv2.imwrite("data/debug/marks_secured_clean.png", clean_marks_secured_roi(marks_secured))
+if cropped.get("header") is not None:
+    header = cv2.imread("data/debug/header.png")
+    cv2.imwrite("data/debug/header_clean.png", clean_header_roi(header))
+    print("✅ Saved header_clean.png")
+else:
+    print("⚠️  Skipping header cleaning (region not detected)")
+
+if cropped.get("marks_table") is not None:
+    marks_table = cv2.imread("data/debug/marks_table.png")
+    cv2.imwrite("data/debug/marks_table_clean.png", clean_marks_table_roi(marks_table))
+    print("✅ Saved marks_table_clean.png")
+else:
+    print("⚠️  Skipping marks_table cleaning (region not detected)")
+
+if cropped.get("marks_secured") is not None:
+    marks_secured = cv2.imread("data/debug/marks_secured.png")
+    cv2.imwrite("data/debug/marks_secured_clean.png", clean_marks_secured_roi(marks_secured))
+    print("✅ Saved marks_secured_clean.png")
+else:
+    print("⚠️  Skipping marks_secured cleaning (region not detected)")
 print("********ROI Cleaning Completed********\n")

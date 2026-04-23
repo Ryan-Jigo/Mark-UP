@@ -1,4 +1,9 @@
+import os
 import pytesseract
+from dotenv import load_dotenv
+
+# Load variables from .env file into environment
+load_dotenv()
 
 TESSERACT_PATH = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
 pytesseract.pytesseract.tesseract_cmd = TESSERACT_PATH
