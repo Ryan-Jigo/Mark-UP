@@ -13,7 +13,6 @@ A modern Markdown editor and documentation tool designed to make writing, editin
 
 ## 📸 Screenshots
 
-Add screenshots of the application here.
 <img width="1277" height="700" alt="image" src="https://github.com/user-attachments/assets/d2f850d6-6c4a-4881-b48b-71b33b1abc81" />
 <img width="1279" height="697" alt="image" src="https://github.com/user-attachments/assets/29860a96-aa6b-48d2-83ef-9b9964d760d3" />
 
