@@ -103,7 +103,9 @@ def _encode_image(image: Any) -> str:
 
 
 def _build_model(api_key: str | None = None, model_name: str = DEFAULT_MODEL):
-    key = api_key or "YOUR_API_KEY_HERE"
+    key = api_key or os.getenv("GEMINI_API_KEY") or os.getenv("GOOGLE_API_KEY")
+    if not key:
+        raise RuntimeError("GEMINI_API_KEY is required for answer sheet extraction")
 
     genai.configure(api_key=key)
     return genai.GenerativeModel(model_name)
@@ -590,53 +592,38 @@ def extract_to_result_workbook(
     # Get or create result.xlsx
     get_or_create_result_workbook(result_workbook_path)
     
-    # Load image
+    # Load image and split regions
     image = _load_image(image_path)
+    regions = split_answer_sheet_regions(image)
     
     # Setup Gemini model
     gemini_model = _build_model(api_key, model_name)
     extraction_mode = "gemini"
     
-    # Define unified prompt exactly as requested
-    combined_prompt = (
-        "Extract the roll number from the image.\n"
-        "And extract the marks from the marks table with its corresponding qn number and subqn no.\n"
-        "Context: the roll no extracted is then used to match the name from the data.xlsx and the generate the final output using all these data.\n"
-        "Return the output strictly in JSON format with exactly this structure:\n"
-        '{"roll_no": "", "marks": {"Q1a":"","Q1b":"","Q2a":"","Q2b":"","Q3a":"","Q3b":"","Q4a":"","Q4b":"","Q5a":"","Q5b":"","Q6a":"","Q6b":"","Q7a":"","Q7b":"","Q8a":"","Q8b":"","Q9a":"","Q9b":"","Q10a":"","Q10b":""}}\n'
-        "Use empty strings for empty or unreadable marks."
+    # Extract roll number
+    roll_prompt = (
+        "Extract only the roll number from this answer sheet region. "
+        'Return JSON only in the form {"roll_no":"..."}. '
+        "If the roll number is not present, use an empty string."
     )
     
     try:
-        # Pass the entire image to Gemini
-        payload, _ = _call_gemini_json(gemini_model, image, combined_prompt)
-        roll_no = _normalize_roll_no(payload.get("roll_no", ""))
+        roll_payload, _ = _call_gemini_json(gemini_model, regions["roll_region"], roll_prompt)
+        roll_no = _normalize_roll_no(roll_payload.get("roll_no", ""))
         
-        # Extract question-level marks from unified JSON response
-        question_marks = {}
-        raw_marks = payload.get("marks", {})
-        if isinstance(raw_marks, dict):
-            for qkey in QUESTION_KEYS:
-                question_marks[qkey] = _normalize_mark_value(raw_marks.get(qkey, ""))
-        else:
-            for qkey in QUESTION_KEYS:
-                question_marks[qkey] = ""
-
-        # Pre-process regions for fallback
-        regions = split_answer_sheet_regions(image)
+        # Extract question-level marks
+        question_marks = _extract_question_marks(gemini_model, regions["marks_region"])
         ocr_marks = _fallback_question_marks(regions["marks_region"])
 
         # Reconcile: prefer OCR only when Gemini left blank for that key.
         for qkey in QUESTION_KEYS:
             if not question_marks.get(qkey) and ocr_marks.get(qkey):
                 question_marks[qkey] = ocr_marks[qkey]
-        if not roll_no:
-            roll_no = _fallback_roll_no(regions["roll_region"])
         
     except Exception as e:
-        import traceback
-        traceback.print_exc()
-        raise RuntimeError(f"Gemini API Extraction Failed: {str(e)}")
+        extraction_mode = "ocr_fallback"
+        roll_no = _fallback_roll_no(regions["roll_region"])
+        question_marks = _fallback_question_marks(regions["marks_region"])
     
     # Look up student name
     lookup = load_roll_name_lookup(reference_workbook)

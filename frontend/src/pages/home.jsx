@@ -22,7 +22,7 @@ function Home() {
     <div className="home">
       <Navbar />
       <div className="content">
-        <h1>Welcome, Teacher 👋</h1>
+        <h1>Welcome, Teacher</h1>
         <p className="home-sub">
           {batches.length === 0
             ? "You have no documents yet. Create one with the button below."
